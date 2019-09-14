@@ -1,0 +1,23 @@
+export default{
+    id : 0,
+    userTypeId : 0,
+    name:'',
+    surname:'',
+    email:'',
+    password:'',
+    identityNr:'',
+    gender:0,
+    birthDate:new Date().toJSON().slice(0,10),
+    jobId : 0,
+    countryId : 0,
+    cityId:0,
+    avatarPath:'',
+    taxNr:'',
+    eventCount:0,
+    emailVerification:1,
+    profileStatus:1,
+    notificationStatus:1,
+    creatorId:0,
+    creationDate : new Date().toJSON().slice(0,10),
+    statusId : 2
+}
