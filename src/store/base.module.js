@@ -4,11 +4,15 @@ import {SET_LOADING} from './mutations.type';
 
 const state ={
     isLoading : false,
+    noDataText : 'Kayıt Bulunamadı!'
 }
 
 const getters = {
-    getLoadingState(state){
+    getLoadingState : state => {
         return state.isLoading;
+    },
+    getNoDataText : state => {
+        return state.noDataText;
     }
 }
 

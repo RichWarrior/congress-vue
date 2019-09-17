@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <cg-toolbar
-      v-if="$store.getters.isAuthenticated"
       v-on:drawerStatusChange="drawerStatusChange"></cg-toolbar>
     <cg-sidebar 
         v-if="$store.getters.isAuthenticated"

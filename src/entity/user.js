@@ -1,6 +1,7 @@
 export default{
     id : 0,
     userTypeId : 0,
+    userGuid:'',
     name:'',
     surname:'',
     email:'',
@@ -12,11 +13,13 @@ export default{
     countryId : 0,
     cityId:0,
     avatarPath:'',
+    phoneNr:'',
     taxNr:'',
     eventCount:0,
     emailVerification:1,
     profileStatus:1,
     notificationStatus:1,
+    avatarFile :[],
     creatorId:0,
     creationDate : new Date().toJSON().slice(0,10),
     statusId : 2

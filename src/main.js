@@ -4,28 +4,38 @@ import router from './router'
 import vuetify from './plugins/vuetify';
 import store from './store'
 import ApiService from '@/common/api.service';
-import {setupComponents} from './store/setup.component';
-import {CHECK_USER} from './store/action.type';
+import { setupComponents } from './store/setup.component';
+import { CHECK_USER } from './store/action.type';
 
 Vue.config.productionTip = false
 
 ApiService.init();
 setupComponents(Vue);
 
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
   store.dispatch(CHECK_USER);
-  const isAuthenticated = store.getters.isAuthenticated;
+  const isAuthenticated = store.getters.isAuthenticated; 
   if(isAuthenticated){
-    if(to.path==="/"){
-      router.push({path:'/Anasayfa'})
+    if(to.path === '/'){
+      next(false);
+    }
+    else{
+      next();
     }
   }
-  if(!isAuthenticated){
-    if(to.path!=='/'){
-      router.push({path:'/'})
+  if (!isAuthenticated) {
+    let routerName = ''
+    if (to.path != '/' &&
+      to.path != '/Register' &&
+      to.path != '/ForgotPassword' &&
+      to.path != '/Home'
+    ) {
+      routerName = '/';
+    }else{
+      next();
     }
+    
   }
-  next();
 })
 
 new Vue({

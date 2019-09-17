@@ -12,13 +12,13 @@
         <v-row class="mt-4 ml-1">
           <v-subheader>
             <v-avatar size="64">
-              <img src="https://cdn.vuetifyjs.com/images/lists/1.jpg" alt="avatar" />
+              <img :src="$store.getters.getUser.avatarPath" alt="avatar" />
             </v-avatar>
           </v-subheader>
         </v-row>
         <v-row>
           <v-subheader>
-            <span class="ml-1 subtitle-1 white--text">iletisim@faruksahin.com</span>
+            <span class="ml-1 subtitle-1 white--text">{{$store.getters.getUser.email}}</span>
           </v-subheader>
         </v-row>
       </v-list>
