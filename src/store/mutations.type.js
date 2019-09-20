@@ -4,3 +4,6 @@ export const SET_JOBS = 'setJobs'
 export const SET_COUNTRIES = 'setCountries';
 export const SET_CITIES = "setCities";
 export const SET_USER = "setUser"
+export const SET_SPONSOR = "setSponsor";
+export const SET_SPONSORS = "setSponsors";
+export const SET_VALID_SPONSOR = "setValidSponsor";

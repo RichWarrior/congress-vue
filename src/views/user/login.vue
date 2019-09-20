@@ -86,8 +86,10 @@ export default {
     },
     login() {
       if (this.valid) {
+        const item = this.user;
+        item.loginType = 1;
         this.$store
-          .dispatch(LOGIN_USER, this.user)
+          .dispatch(LOGIN_USER, item)
           .then(() => {
             this.$router.push({path:'/Home'})
           })

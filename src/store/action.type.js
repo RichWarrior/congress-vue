@@ -6,3 +6,6 @@ export const GET_COUNTRIES = "getCountries";
 export const GET_CITIES = "getCities";
 export const REGISTER_USER ="registerUser";
 export const LOGIN_USER = "loginUser";
+export const NEW_SPONSOR ="newSponsor";
+export const GET_SPONSORS = "getSponsors";
+export const VALIDATE_SPONSOR = "validateSponsor";

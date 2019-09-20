@@ -1,6 +1,7 @@
 import ApiService from '@/common/api.service';
 import JwtService from '@/common/jwt.service';
 import UserService from '@/common/user.service';
+import MenuService from '@/common/menu.service';
 import {
     CHECK_USER,
     LOGOUT,
@@ -21,7 +22,7 @@ import {
 const state = {
     user: JSON.parse(UserService.getUser()),
     isAuthenticated: !!JwtService.getToken(),
-    menu: [],
+    menu:JSON.parse(MenuService.getMenu()),
     jobs: [],
     countries: [],
     cities: []
@@ -42,6 +43,9 @@ const getters = {
     },
     getUser : state => {
         return state.user;
+    },
+    getMenu : state => {
+        return state.menu;
     }
 }
 
@@ -116,19 +120,21 @@ const mutations = {
         JwtService.destroyToken();
     },
     [SET_JOBS](state, payload) {
-        state.jobs = payload.data.jobs;
+        state.jobs = payload.jobs;
     },
     [SET_COUNTRIES](state, payload) {
-        state.countries = payload.data.countries;
+        state.countries = payload.countries;
     },
     [SET_CITIES](state, payload) {
-        state.cities = payload.data.cities;
+        state.cities = payload.cities;
     },
     [SET_USER](state,payload){
         state.isAuthenticated = true;
         state.user = payload.user;
+        state.menu = payload.menus;
         JwtService.setToken(payload.token);
         UserService.setUser(JSON.stringify(payload.user));
+        MenuService.setMenu(JSON.stringify(payload.menus));
     }
 }
 

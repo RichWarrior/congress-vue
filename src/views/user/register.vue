@@ -244,7 +244,7 @@ export default {
     ],
     jobs: [],
     jobRules: [v => !!v || "Meslek Boş Olamaz"],
-    avatarFileRules: [v => !!v || "Profil Resmi Seçiniz"],
+    avatarFileRules: [value => !value || value.size > 0 || 'Profil Resmi Gereklidir'],
     countries: [],
     countryRules: [v => !!v || "Ülke Boş Olamaz"],
     cities: [],
@@ -293,11 +293,7 @@ export default {
         });
     }
   },
-  created() {
-    if (this.$store.getters.isAuthenticated) {
-      this.$router.push({ path: "/Home" });
-    } else {
-      this.user = initialize();
+  created() {    
       this.$store
         .dispatch(GET_JOBS)
         .then(() => {
@@ -314,7 +310,6 @@ export default {
         .catch(err => {
           this.$swal("HATA", err.errMessage, "error");
         });
-    }
   }
 };
 </script>

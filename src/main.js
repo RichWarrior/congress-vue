@@ -24,13 +24,12 @@ router.beforeEach((to, from, next) => {
     }
   }
   if (!isAuthenticated) {
-    let routerName = ''
     if (to.path != '/' &&
       to.path != '/Register' &&
       to.path != '/ForgotPassword' &&
       to.path != '/Home'
-    ) {
-      routerName = '/';
+    ) {      
+      next(false)
     }else{
       next();
     }

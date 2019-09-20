@@ -17,7 +17,7 @@
       <div class="hidden-sm-and-down">
         <v-row class="mr-2">
           <v-tooltip bottom class="mr-1" v-if="!$store.getters.isAuthenticated">
-            <template v-slot:activator="{ on }" >
+            <template v-slot:activator="{ on }">
               <v-btn text class="mr-1" v-on="on" @click="registerRoute">
                 <v-icon>fa-user-plus</v-icon>
               </v-btn>
@@ -39,7 +39,7 @@
               </v-btn>
             </template>
             <span>Oturum Kapat</span>
-          </v-tooltip>
+          </v-tooltip>          
         </v-row>
       </div>
       <div class="hidden-sm-and-up">
@@ -65,29 +65,35 @@
           </v-list>
         </v-menu>
       </div>
-    </v-app-bar>   
+    </v-app-bar>
   </div>
 </template>
 
 <script>
-import {LOGOUT} from '@/store/action.type';
+import { LOGOUT } from "@/store/action.type";
 export default {
- name:'toolbar', 
- methods:{
-   drawerStatus(){
-     this.$emit('drawerStatusChange')
-   },
-   registerRoute(){
-     this.$router.push({path:'/Register'})
-   },
-   loginRoute(){
-     this.$router.push({path:'/'})
-   },
-   logout(){
-     this.$store.dispatch(LOGOUT).then(()=>{
-       this.loginRoute();
-     })
-   }
- }
+  name: "toolbar",
+  methods: {
+    drawerStatus() {
+      this.$emit("drawerStatusChange");
+    },
+    registerRoute() {
+      this.$router.push({ path: "/Register" });
+    },
+    loginRoute() {
+      this.$router.push({ path: "/" });
+    },
+    logout() {
+      this.$store.dispatch(LOGOUT).then(() => {
+        this.loginRoute();
+      });
+    }
+  }
 };
 </script>
+
+<style scoped>
+.avatar{
+  cursor: pointer;
+}
+</style>
