@@ -63,10 +63,13 @@
 <script>
 import userEntity from "@/entity/user";
 import { LOGIN_USER } from "@/store/action.type";
+const initialize = () => {
+  return Object.assign({},userEntity)
+}
 export default {
   data: () => ({
     valid: false,
-    user: userEntity,
+    user: initialize(),
     emailRule: [
       v => !!v || "E-Posta Adresi Zorunludur",
       v => v.length <= 100 || "E-Posta Adresi 100 Karakterden Uzun Olamaz",

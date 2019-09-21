@@ -5,6 +5,8 @@ import Register from '@/views/user/register';
 import ForgotPassword from '@/views/user/forgotPassword';
 import Home from '@/views/dashboard/index';
 import Sponsor from '@/views/sponsor/index';
+import Business from '@/views/business/index';
+import NewBusiness from '@/views/business/new';
 
 Vue.use(Router)
 
@@ -36,6 +38,16 @@ export default new Router({
       name: '/Sponsor',
       path :'/Sponsorlar',
       component : Sponsor
+    },
+    {
+      name:'/Business',
+      path:'/Business',
+      component:Business
+    },
+    {
+      name:'/NewBusiness',
+      path:'/NewBusiness',
+      component:NewBusiness
     }
   ]
 })

@@ -9,3 +9,7 @@ export const SET_SPONSORS = 'setSponsors';
 export const SET_VALID_SPONSOR = 'setValidSponsor';
 export const SET_DELETE_SPONSOR = 'setDeleteSponsor';
 export const SET_EDIT_SPONSOR = 'setEditSponsor';
+export const SET_BUSINES = 'setBusines';
+export const SET_BUSINESS = 'setBusiness';
+export const SET_EDIT_BUSINES = 'setEditBusines';
+export const SET_DELETE_BUSINES = 'setDeleteBusines';

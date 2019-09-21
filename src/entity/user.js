@@ -18,7 +18,7 @@ export default{
     eventCount:0,
     emailVerification:1,
     profileStatus:1,
-    notificationStatus:1,
+    notificationStatus:2,
     avatarFile :[],
     creatorId:0,
     creationDate : new Date().toJSON().slice(0,10),

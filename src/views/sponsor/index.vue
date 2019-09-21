@@ -91,8 +91,7 @@
                         </template>
                         <v-card>
                           <v-card-title>
-                            <span class="headline" v-if="itemIndex == -1">Yeni Sponsor Oluştur</span>
-                            <span class="headline" v-else>Sponsor Güncelle</span>
+                            <span class="headline">Yeni Sponsor Oluştur</span>
                           </v-card-title>
                           <v-card-text>
                             <v-form v-model="formValid">
@@ -210,7 +209,6 @@ export default {
       }
     },
     validateSponsor(item) {
-      let itemIndex = this.sponsors.indexOf(item);
       this.$swal({
         title: "Emin Misiniz?",
         text: `${item.name} Sponsorunu Aktifleştirmek İstediğinize Emin Misiniz?`,

@@ -11,3 +11,7 @@ export const GET_SPONSORS = 'getSponsors';
 export const VALIDATE_SPONSOR = 'validateSponsor';
 export const DELETE_SPONSOR = 'deleteSponsor';
 export const EDIT_SPONSOR ='editSponsor';
+export const NEW_BUSINES = 'newBusines';
+export const GET_BUSINESS = 'getBusiness';
+export const EDIT_BUSINES= 'editBusines';
+export const DELETE_BUSINES = 'deleteBusines';
