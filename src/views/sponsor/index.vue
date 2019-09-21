@@ -5,21 +5,44 @@
         <v-card class="elevation-12">
           <v-card-text>
             <v-row>
-              <v-col cols="12" md="12">
+              <v-col cols="12" md="12" sm="10">
                 <v-data-table
                   :headers="headers"
                   :items="sponsors"
                   :no-data-text="$store.getters.getNoDataText"
-                  :disable-sort="true"
                   class="elevation-1"
                 >
                   <template v-slot:item="{ item }">
                     <tr>
-                      <td>{{item.name}}</td>
                       <td>
-                        <v-avatar size="32">
-                          <v-img :src="item.logoPath"></v-img>
-                        </v-avatar>
+                        <v-edit-dialog :return-value.sync="item.name" @save="updateSponsor(item)">
+                          {{item.name}}
+                            <template v-slot:input>
+                              <v-text-field
+                                v-model="item.name"
+                                :rules="nameRules"
+                                label="Düzenle"
+                                multi-line
+                                :counter="50"
+                              ></v-text-field>
+                            </template>
+                        </v-edit-dialog>
+                      </td>
+                      <td>
+                        <v-edit-dialog large persistent @save="updateSponsor(item)">
+                          <v-avatar size="32">
+                            <v-img :src="item.logoPath"></v-img>
+                          </v-avatar>
+                          <template v-slot:input>
+                            <v-file-input
+                              v-model="item.logoFile"
+                              :rules="logoRules"
+                              accept="image/*"
+                              label="Sponsor Logosu"
+                              show-size                              
+                            ></v-file-input>
+                          </template>
+                        </v-edit-dialog>
                       </td>
                       <td>
                         <v-chip v-if="item.statusId === 2" color="success">Aktif</v-chip>
@@ -28,12 +51,12 @@
                       <td>
                         <v-tooltip top>
                           <template v-slot:activator="{ on }">
-                            <v-btn icon v-on="on">
+                            <v-btn icon v-on="on" @click="deteleSponsor(item)">
                               <v-icon>fa fa-trash</v-icon>
                             </v-btn>
                           </template>
                           <span>{{item.name}} Sponsorunu Sil</span>
-                        </v-tooltip>                        
+                        </v-tooltip>
                         <v-tooltip top>
                           <template v-slot:activator="{on}">
                             <v-btn
@@ -123,7 +146,9 @@ import sponsorEntity from "@/entity/sponsor";
 import {
   NEW_SPONSOR,
   GET_SPONSORS,
-  VALIDATE_SPONSOR
+  VALIDATE_SPONSOR,
+  DELETE_SPONSOR,
+  EDIT_SPONSOR
 } from "@/store/action.type";
 const initialize = () => {
   return Object.assign({}, sponsorEntity);
@@ -137,7 +162,7 @@ export default {
     headers: [
       {
         text: "Sponsor Adı",
-        sortable: false
+        sortable: true
       },
       {
         text: "Sponsor Logosu",
@@ -193,21 +218,64 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#d33",
         cancelButtonColor: "#3085d6",
-        confirmButtonText: "Evet,Sil",
+        confirmButtonText: "Evet,Aktifleştir",
         cancelButtonText: "Vazgeç"
       }).then(result => {
         if (result.value) {
           this.$store
             .dispatch(VALIDATE_SPONSOR, item)
-            .then(() => {
+            .then(response => {
               let getters = this.$store.getters.getSponsor;
-              item.statusId = getters.statusId;
+              if (getters.statusId === 2) {
+                this.$swal("BAŞARILI", response.errMessage, "success");
+                item.statusId = getters.statusId;
+              }
             })
             .catch(err => {
               this.$swal("HATA", err.errMessage, "error");
             });
         }
       });
+    },
+    deteleSponsor(item) {
+      let itemIndex = this.sponsors.indexOf(item);
+      this.$swal({
+        title: "Emin Misiniz?",
+        text: `${item.name} Sponsorunu Silmek İstediğinize Emin Misiniz?`,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Evet,Sil",
+        cancelButtonText: "Vazgeç"
+      }).then(result => {
+        if (result.value) {
+          this.$store
+            .dispatch(DELETE_SPONSOR, item)
+            .then(response => {
+              let sponsor = this.$store.getters.getSponsor;
+              if (sponsor.statusId === 1) {
+                this.sponsors.splice(itemIndex, 1);
+                this.$swal("BAŞARILI", response.errMessage, "success");
+              }
+            })
+            .catch(err => {
+              this.$swal("HATA", err.errMessage, "error");
+            });
+        }
+      });
+    },
+    updateSponsor(item) {
+      if(item.name!='' ||item.logoFile!==null){
+        this.$store.dispatch(EDIT_SPONSOR,item).then((response)=>{
+          let updatedItem = this.$store.getters.getSponsor;
+          item.logoPath = updatedItem.logoPath;
+          item.name = updatedItem.name;          
+          this.$swal('BAŞARILI',response.errMessage,'success');
+        }).catch((err)=>{
+          this.$swal('HATA',err.errMessage,'error');
+        })
+      }
     }
   },
   created() {
