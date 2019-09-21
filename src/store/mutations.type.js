@@ -13,3 +13,5 @@ export const SET_BUSINES = 'setBusines';
 export const SET_BUSINESS = 'setBusiness';
 export const SET_EDIT_BUSINES = 'setEditBusines';
 export const SET_DELETE_BUSINES = 'setDeleteBusines';
+export const SET_PARTICIPANTS = 'setParticipants';
+export const SET_CHANGE_STATUS_PARTICIPANTS = 'setChangeStatusParticipants';

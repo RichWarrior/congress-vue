@@ -5,6 +5,7 @@ import base from './base.module';
 import user from './user.module';
 import sponsor from './sponsor.module';
 import business from './business.module';
+import participant from './participant.module';
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     base,
     user,
     sponsor,
-    business
+    business,
+    participant
   }
 })
