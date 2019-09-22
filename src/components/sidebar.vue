@@ -10,8 +10,13 @@
     >
       <v-list>
         <v-row class="mt-4 ml-1">
-          <v-subheader>
-            <v-avatar size="64">
+          <v-subheader class="hidden-sm-and-down">            
+            <v-avatar size="64" >
+              <img :src="$store.getters.getUser.avatarPath" alt="avatar" />
+            </v-avatar>
+          </v-subheader>
+            <v-subheader class="hidden-sm-and-up mt-12">            
+            <v-avatar size="64" >
               <img :src="$store.getters.getUser.avatarPath" alt="avatar" />
             </v-avatar>
           </v-subheader>

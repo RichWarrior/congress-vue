@@ -17,3 +17,4 @@ export const EDIT_BUSINES= 'editBusines';
 export const DELETE_BUSINES = 'deleteBusines';
 export const GET_PARTICIPANTS = 'getParticipant';
 export const CHANGE_PARTICIPANT_STATUS = 'changeParticipantStatus';
+export const UPDATE_USER = 'updateUser';

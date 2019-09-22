@@ -8,6 +8,7 @@ import Sponsor from '@/views/sponsor/index';
 import Business from '@/views/business/index';
 import NewBusiness from '@/views/business/new';
 import Participant from '@/views/participant/index';
+import Profile from '@/views/profile/index';
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
       name:'/Participant',
       path:'/Participant',
       component:Participant
+    },
+    {
+      name:'/Profile',
+      path:'/Profile',
+      component:Profile
     }
   ]
 })

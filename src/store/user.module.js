@@ -9,18 +9,20 @@ import {
     GET_COUNTRIES,
     GET_CITIES,
     REGISTER_USER,
-    LOGIN_USER
+    LOGIN_USER,
+    UPDATE_USER
 } from './action.type';
 import {
     PURGE_USER,
     SET_JOBS,
     SET_COUNTRIES,
     SET_CITIES,
-    SET_USER
+    SET_USER,
+    SET_UPDATED_USER
 } from './mutations.type';
 
 const state = {
-    user: JSON.parse(UserService.getUser()),
+    user: JSON.parse(UserService.getUser()),            
     isAuthenticated: !!JwtService.getToken(),
     menu:JSON.parse(MenuService.getMenu()),
     jobs: [],
@@ -109,6 +111,16 @@ const actions = {
                 reject(err);
             })
         })
+    },
+    [UPDATE_USER](context,payload){
+        return new Promise((resolve,reject)=>{
+            ApiService.postFile('user/UpdateUser',payload).then((response)=>{
+                context.commit(SET_UPDATED_USER,response.data);
+                resolve(response.data)
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
     }
 }
 
@@ -118,6 +130,8 @@ const mutations = {
         state.user = {};
         state.menu = {};
         JwtService.destroyToken();
+        UserService.destroyUser();
+        MenuService.destroyMenu();
     },
     [SET_JOBS](state, payload) {
         state.jobs = payload.jobs;
@@ -135,6 +149,12 @@ const mutations = {
         JwtService.setToken(payload.token);
         UserService.setUser(JSON.stringify(payload.user));
         MenuService.setMenu(JSON.stringify(payload.menus));
+    },
+    [SET_UPDATED_USER](state,payload){
+        state.isAuthenticated = true;
+        payload.data.user.avatarFile = [];
+        state.user = payload.data.user;
+        UserService.setUser(JSON.stringify(payload.data.user))
     }
 }
 
