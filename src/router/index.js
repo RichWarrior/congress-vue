@@ -9,6 +9,10 @@ import Business from '@/views/business/index';
 import NewBusiness from '@/views/business/new';
 import Participant from '@/views/participant/index';
 import Profile from '@/views/profile/index';
+import Events from '@/views/events/index';
+import newEvent from '@/views/events/new';
+import eventDetail from '@/views/events/detail';
+import newEventSpeaker from '@/views/eventdetail/new';
 
 Vue.use(Router)
 
@@ -60,6 +64,28 @@ export default new Router({
       name:'/Profile',
       path:'/Profile',
       component:Profile
+    },
+    {
+      name:'/Events',
+      path:'/Events',
+      component : Events
+    },
+    {
+      name:'/NewEvent',
+      path:'/NewEvent',
+      component:newEvent
+    },
+    {
+      name:'/eventDetail',
+      path:'/eventDetail',
+      component:eventDetail,
+      props:true
+    },
+    {
+      name:'/newEventSpeaker',
+      path:'/newEventSpeaker',
+      component:newEventSpeaker,
+      props:true
     }
   ]
 })

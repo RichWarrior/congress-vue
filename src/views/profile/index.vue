@@ -3,8 +3,8 @@
     <v-layout row wrap class="ma-5">
       <v-flex xs12 md12>
         <doctor :user="user" v-if="user.userTypeId===1" />
-        <user :user="user" v-if="user.userTypeId ===2" />
-        <business :user="user" v-if="user.userTypeId === 3" />
+        <business :user="user" v-if="user.userTypeId === 2" />
+        <user :user="user" v-if="user.userTypeId ===3" />
       </v-flex>
     </v-layout>
   </v-container>

@@ -200,8 +200,12 @@ export default {
         this.$store
           .dispatch(NEW_SPONSOR, this.sponsor)
           .then(response => {
-            this.sponsors.push(this.$store.getters.getSponsor);
+            let item = this.$store.getters.getSponsor;
+            item.logoFile = [];
+            this.sponsors.push(item);
             this.$swal("BAŞARILI", response.errMessage, "success");
+            this.sponsor = initialize();
+            this.dialog = false;
           })
           .catch(err => {
             this.$swal("HATA", err.errMessage, "error");

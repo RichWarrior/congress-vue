@@ -16,3 +16,6 @@ export const SET_DELETE_BUSINES = 'setDeleteBusines';
 export const SET_PARTICIPANTS = 'setParticipants';
 export const SET_CHANGE_STATUS_PARTICIPANTS = 'setChangeStatusParticipants';
 export const SET_UPDATED_USER = 'setUpdatedUser';
+export const SET_EVENT = 'setEvent';
+export const SET_EVENTS = 'setEvents';
+export const SET_DELETED_EVENT= 'setDeletedEvent';

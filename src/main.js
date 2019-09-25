@@ -14,27 +14,38 @@ setupComponents(Vue);
 
 router.beforeEach((to, from, next) => {
   store.dispatch(CHECK_USER);
-  const isAuthenticated = store.getters.isAuthenticated; 
-  if(isAuthenticated){
-    if(to.path === '/'){
-      next(false);
-    }
-    else{
-      next();
-    }
-  }
-  if (!isAuthenticated) {
-    if (to.path != '/' &&
-      to.path != '/Register' &&
-      to.path != '/ForgotPassword' &&
-      to.path != '/Home'
-    ) {      
+  const isAuthenticated = store.getters.isAuthenticated;
+  const user = store.getters.getUser;
+  if (user.profileStatus == 1) {
+    if(to.path!=='/Profile'){
       next(false)
+      router.push({path:'/Profile'})
     }else{
       next();
     }
-    
+  } else {
+    if (isAuthenticated) {
+      if (to.path === '/') {
+        next(false);
+      }
+      else {
+        next();
+      }
+    }
+    if (!isAuthenticated) {
+      if (to.path != '/' &&
+        to.path != '/Register' &&
+        to.path != '/ForgotPassword' &&
+        to.path != '/Home'
+      ) {
+        next(false)
+      } else {
+        next();
+      }
+
+    }
   }
+
 })
 
 new Vue({
