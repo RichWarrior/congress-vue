@@ -57,7 +57,7 @@
               name="input-2-1"
               label="Adres"
               outlined
-            ></v-textarea>
+            ></v-textarea>       
           </v-col>
         </v-row>
         <v-row class="ma-5">
@@ -67,7 +67,7 @@
           </v-col>
           <v-col cols="12" md="6">
             <h1 class="title">Bitiş Tarihi</h1>
-            <v-date-picker v-model="item.endDate" full-width locale="tr"></v-date-picker>
+            <v-date-picker v-model="item.endDate" :min="item.startDate" full-width locale="tr"></v-date-picker>
           </v-col>
         </v-row>
       </v-card-text>
@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import { GET_COUNTRIES, GET_CITIES,EDIT_EVENT } from "@/store/action.type";
+import { GET_COUNTRIES, GET_CITIES, EDIT_EVENT } from "@/store/action.type";
 import cityEntities from "@/entity/city";
 export default {
   props: {
@@ -117,13 +117,16 @@ export default {
           this.$swal("HATA", err.errMessage, "error");
         });
     },
-    saveItem(){
-      if(this.formValid){
-        this.$store.dispatch(EDIT_EVENT,this.item).then((response)=>{
-          this.$swal('BAŞARILI',response.errMessage,'success')
-        }).catch((err)=>{
-          this.$swal('HATA',err.errMessage,'error')
-        })
+    saveItem() {
+      if (this.formValid) {
+        this.$store
+          .dispatch(EDIT_EVENT, this.item)
+          .then(response => {
+            this.$swal("BAŞARILI", response.errMessage, "success");
+          })
+          .catch(err => {
+            this.$swal("HATA", err.errMessage, "error");
+          });
       }
     }
   },

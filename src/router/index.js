@@ -13,6 +13,7 @@ import Events from '@/views/events/index';
 import newEvent from '@/views/events/new';
 import eventDetail from '@/views/events/detail';
 import newEventSpeaker from '@/views/eventdetail/new';
+import updateEventSpeaker from '@/views/eventdetail/update'
 
 Vue.use(Router)
 
@@ -85,6 +86,12 @@ export default new Router({
       name:'/newEventSpeaker',
       path:'/newEventSpeaker',
       component:newEventSpeaker,
+      props:true
+    },
+    {
+      name:'/updateEventSpeaker',
+      path:'/updateEventSpeaker',
+      component:updateEventSpeaker,
       props:true
     }
   ]

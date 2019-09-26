@@ -22,12 +22,39 @@
             </v-btn>
           </v-toolbar>
         </template>
+        <template v-slot:item="{item}">
+          <tr>
+            <td>{{item.speakerName}}</td>
+            <td>{{item.day}}</td>
+            <td>{{item.startTime}}</td>
+            <td>{{item.endTime}}</td>
+            <td>
+              <v-tooltip top>
+                <template v-slot:activator="{on}">
+                  <v-btn icon v-on="on" @click="deleteItem(item)">
+                    <v-icon>fa fa-trash</v-icon>
+                  </v-btn>
+                </template>
+                <span>Konuşmacıyı Sil</span>
+              </v-tooltip>
+              <v-tooltip top>
+                <template v-slot:activator="{on}">
+                  <v-btn icon v-on="on" @click="updateItem(item)">
+                    <v-icon>fa fa-edit</v-icon>
+                  </v-btn>
+                </template>
+                <span>Konuşmacı Bilgilerini Düzenle</span>
+              </v-tooltip>
+            </td>
+          </tr>
+        </template>
       </v-data-table>
     </v-col>
   </v-row>
 </template>
 
 <script>
+import { GET_EVENTDETAIL, DELETE_EVENTDETAIL } from "@/store/action.type";
 export default {
   props: {
     item: {
@@ -64,11 +91,53 @@ export default {
     ],
     speakers: []
   }),
-  methods:{
-      newEventSpeaker(){
-          const item = this.item;
-          this.$router.push({name:'/newEventSpeaker',params:{item}})
-      }
+  methods: {
+    newEventSpeaker() {
+      const item = this.item;
+      this.$router.push({ name: "/newEventSpeaker", params: { item } });
+    },
+    deleteItem(item) {
+      this.$swal({
+        title: "Emin Misiniz?",
+        text: `${item.speakerName}  Konuşmacısını Silmek İstediğinize Emin Misiniz?`,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Evet,Sil",
+        cancelButtonText: "Vazgeç"
+      }).then(result => {
+        if (result.value) {
+          let indexOf = this.speakers.indexOf(item);
+          this.$store
+            .dispatch(DELETE_EVENTDETAIL, item)
+            .then(response => {
+              this.$swal("BAŞARILI", response.errMessage, "success");
+              this.speakers.splice(indexOf, 1);
+            })
+            .catch(err => {
+              this.$swal("HATA", err.errMessage, "error");
+            });
+        }
+      });
+    },
+    updateItem(item){
+      this.$router.push({name:'/updateEventSpeaker',params:{item}})
+    }
+  },
+  beforeMount() {
+    if (this.item === undefined) {
+      this.$router.push({ path: "/Home" });
+    } else {
+      this.$store
+        .dispatch(GET_EVENTDETAIL, this.item)
+        .then(() => {
+          this.speakers = this.$store.getters.getEventDetails;
+        })
+        .catch(err => {
+          this.$swal("HATA", err.errMessage, "error");
+        });
+    }
   }
 };
 </script>

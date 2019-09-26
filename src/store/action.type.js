@@ -23,3 +23,7 @@ export const GET_EVENTS = 'getEvents';
 export const DELETE_EVENT = 'deleteEvent'
 export const GET_EVENT = "getEvent";
 export const EDIT_EVENT = 'editEvent';
+export const NEW_EVENTDETAIL = 'newEventDetail';
+export const GET_EVENTDETAIL = 'getEventDetail';
+export const DELETE_EVENTDETAIL = 'deleteEventDetail';
+export const UPDATE_EVENTDETAIL = 'updateEventDetail';

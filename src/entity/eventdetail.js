@@ -1,8 +1,8 @@
 export default{
     id : 0,
     eventId : 0,
-    startTime :'',
-    endTime : '',
+    startTime :'00:00:00',
+    endTime : '00:00:00',
     day : 1,
     speakerName : '',
     description: '',

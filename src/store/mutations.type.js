@@ -19,3 +19,4 @@ export const SET_UPDATED_USER = 'setUpdatedUser';
 export const SET_EVENT = 'setEvent';
 export const SET_EVENTS = 'setEvents';
 export const SET_DELETED_EVENT= 'setDeletedEvent';
+export const SET_EVENT_DETAIL = 'setEventDetail';
