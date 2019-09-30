@@ -14,6 +14,7 @@ import newEvent from '@/views/events/new';
 import eventDetail from '@/views/events/detail';
 import newEventSpeaker from '@/views/eventdetail/new';
 import updateEventSpeaker from '@/views/eventdetail/update'
+import newParticipant from '@/views/eventparticipant/index';
 
 Vue.use(Router)
 
@@ -93,6 +94,12 @@ export default new Router({
       path:'/updateEventSpeaker',
       component:updateEventSpeaker,
       props:true
+    },
+    {
+      name:'/NewParticipant',
+      path:'/NewParticipant',
+      component:newParticipant,
+      props : true
     }
   ]
 })

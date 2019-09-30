@@ -1,5 +1,13 @@
 import ApiService from '@/common/api.service';
-import {GET_PARTICIPANTS,CHANGE_PARTICIPANT_STATUS} from '@/store/action.type';
+import {
+    GET_PARTICIPANTS,
+    CHANGE_PARTICIPANT_STATUS,
+    GET_AVAILABLE_PARTICIPANT,
+    NEW_PARTICIPANTS,
+    GET_EVENT_PARTICIPANTS,
+    DELETE_EVENT_PARTICIPANTS,
+    IMPORT_EVENT_PARTICIPANTS
+} from '@/store/action.type';
 import {SET_PARTICIPANTS,SET_CHANGE_STATUS_PARTICIPANTS} from '@/store/mutations.type';
 
 const state = {
@@ -36,7 +44,54 @@ const actions = {
                 reject(err)
             })
         })
-    }   
+    },
+    [GET_AVAILABLE_PARTICIPANT](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/getavailableparticipant',data).then((response)=>{
+                context.commit(SET_PARTICIPANTS,response.data);
+                resolve(response);
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
+    },
+    [NEW_PARTICIPANTS](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/newparticipant',data).then((response)=>{
+                resolve(response)
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [GET_EVENT_PARTICIPANTS](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/geteventparticipants',data).then((response)=>{
+                context.commit(SET_PARTICIPANTS,response.data)
+                resolve(response);
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [DELETE_EVENT_PARTICIPANTS](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/deleteeventparticipant',data).then((response)=>{
+                resolve(response);
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [IMPORT_EVENT_PARTICIPANTS](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.postFile('Event/importeventparticipants',data).then((response)=>{
+                resolve(response.data)
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    }
 }
 
 const mutations = {

@@ -19,7 +19,7 @@
             <v-avatar size="64" >
               <img :src="$store.getters.getUser.avatarPath" alt="avatar" />
             </v-avatar>
-          </v-subheader>
+          </v-subheader>       
         </v-row>
         <v-row>
           <v-subheader>

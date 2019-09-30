@@ -24,6 +24,10 @@
               Kategoriler
               <v-icon>fa fa-bookmark</v-icon>
             </v-tab>
+            <v-tab href="#sponsor">
+              Sponsorlar
+              <v-icon>fa fa-dollar-sign</v-icon>
+            </v-tab>
           </v-tabs>
 
           <v-tabs-items v-model="tab">
@@ -39,6 +43,9 @@
             <v-tab-item :value="'eventcategory'">
               <eventcategory :item="item"/>
             </v-tab-item>
+            <v-tab-item :value="'sponsor'">
+              <eventsponsor :item="item"/>
+            </v-tab-item>
           </v-tabs-items>
         </v-card>
       </v-flex>
@@ -51,6 +58,7 @@ import eventdetail from "@/components/event/eventdetail";
 import eventspeaker from "@/components/event/eventspeaker";
 import eventparticipant from "@/components/event/eventparticipant";
 import eventcategory from '@/components/event/eventcategory';
+import eventsponsor from '@/components/event/eventsponsor';
 import { GET_EVENT } from "@/store/action.type";
 export default {
   name: "EventDetail",
@@ -59,7 +67,8 @@ export default {
     eventdetail,
     eventspeaker,
     eventparticipant,
-    eventcategory
+    eventcategory,
+    eventsponsor
   },
   data: () => ({
     tab: "eventdetail",
