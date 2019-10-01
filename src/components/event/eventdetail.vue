@@ -73,7 +73,7 @@
       </v-card-text>
       <v-card-actions>
         <div class="flex-grow-1"></div>
-        <v-btn color="primary" :disabled="!formValid" @click="saveItem">
+        <v-btn color="primary" :disabled="!formValid" @click="saveItem" v-if="item.isCompleted === 1">
           <v-icon left class="hidden-sm-and-down">fa fa-save</v-icon>
           <v-icon class="hidden-sm-and-up">fa fa-save</v-icon>
           <span>Kaydet</span>

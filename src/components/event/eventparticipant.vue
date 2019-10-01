@@ -72,7 +72,7 @@
                     <v-icon>fa fa-trash</v-icon>
                   </v-btn>
                 </template>
-                <span>{{formatName(item)}} Katılımcısını Sil</span>
+                <span>{{item.email}} Katılımcısını Sil</span>
               </v-tooltip>
             </td>
           </tr>
@@ -123,7 +123,7 @@ export default {
       }
     },
     formatName(item) {
-      return item.name + " " + item.surname;
+      return item.name === '' ? 'Katılımcı Adı Yok' : item.name+' '+item.surname;
     },
     deleteParticipant(item) {
       let index = this.participants.indexOf(item);

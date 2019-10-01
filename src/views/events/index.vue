@@ -132,9 +132,6 @@ export default {
     },
     eventDetail(item){
       this.$router.push({name:'/eventDetail',params:{item}})
-    },
-    getDate(){
-      return new Date();
     }
   },
   created() {

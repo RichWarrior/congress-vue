@@ -7,6 +7,7 @@ import sponsor from './sponsor.module';
 import business from './business.module';
 import participant from './participant.module';
 import event from './event.module';
+import category from './category.module';
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     sponsor,
     business,
     participant,
-    event
+    event,
+    category
   }
 })
