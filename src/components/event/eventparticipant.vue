@@ -16,7 +16,7 @@
             <div class="flex-grow-1"></div>
             <v-dialog v-model="dialog" max-width="500px" persistent>
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark class="mb-2 mr-2" v-on="on">
+                <v-btn color="primary" dark class="mb-2 mr-2" v-on="on" :disabled="item.isCompleted === 2 ? true : false">
                   <v-icon>fa-upload</v-icon>
                 </v-btn>
               </template>
@@ -53,7 +53,7 @@
             </v-dialog>
             <v-tooltip top>
               <template v-slot:activator="{on}">
-                <v-btn color="primary" dark class="mb-2" v-on="on" @click="newParticipant">
+                <v-btn color="primary" dark class="mb-2" v-on="on" @click="newParticipant" :disabled="item.isCompleted === 2 ? true : false">
                   <v-icon>fa-plus</v-icon>
                 </v-btn>
               </template>

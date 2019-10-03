@@ -37,3 +37,7 @@ export const DELETE_CATEGORY ='deleteCategory';
 export const GET_MAIN_CATEGORIES = 'getMainCategories';
 export const NEW_CATEGORY ='newCategory';
 export const UPDATE_CATEGORY ='updateCategory';
+export const GET_EVENT_AVAILABLE_CATEGORIES ='getEventAvailableCategories';
+export const NEW_EVENT_CATEGORIES = 'newEventCategories';
+export const GET_EVENT_CATEGORIES = 'getEventCategories';
+export const DELETE_EVENT_CATEGORY = 'deleteEventCategory';

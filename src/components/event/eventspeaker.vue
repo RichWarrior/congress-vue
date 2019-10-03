@@ -15,7 +15,7 @@
             </v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <div class="flex-grow-1"></div>
-            <v-btn color="primary" dark class="mb-2" @click="newEventSpeaker">
+            <v-btn color="primary" dark class="mb-2" @click="newEventSpeaker" :disabled="item.isCompleted === 2 ? true : false">
               <v-icon class="hidden-sm-and-down" left>fa-plus</v-icon>
               <v-icon class="hidden-sm-and-up">fa-plus</v-icon>
               <span class="hidden-sm-and-down">Yeni Konuşmacı</span>

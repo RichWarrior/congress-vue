@@ -7,14 +7,27 @@ import {
     NEW_EVENTDETAIL,
     GET_EVENTDETAIL,
     DELETE_EVENTDETAIL,
-    UPDATE_EVENTDETAIL
+    UPDATE_EVENTDETAIL,
+    GET_EVENT_AVAILABLE_CATEGORIES,
+    NEW_EVENT_CATEGORIES,
+    GET_EVENT_CATEGORIES,
+    DELETE_EVENT_CATEGORY
 } from '@/store/action.type';
-import { SET_EVENT, SET_EVENTS, SET_DELETED_EVENT, SET_EVENT_DETAIL } from '@/store/mutations.type';
+import {
+    SET_EVENT,
+    SET_EVENTS,
+    SET_DELETED_EVENT,
+    SET_EVENT_DETAIL,
+    SET_EVENT_AVAILABLE_CATEGORIES,
+    SET_EVENT_CATEGORIES
+} from '@/store/mutations.type';
 const state = {
     events: [],
     event: {},
     eventDetail: {},
-    eventDetails: []
+    eventDetails: [],
+    eventAvailableCategories : [],
+    eventCategories : [] 
 }
 
 const getters = {
@@ -29,6 +42,12 @@ const getters = {
     },
     getEventDetails: state => {
         return state.eventDetails;
+    },
+    getEventAvailableCategories : state => {
+        return state.eventAvailableCategories;
+    },
+    getEventCategories : state => {
+        return state.eventCategories;
     }
 }
 
@@ -119,6 +138,44 @@ const actions = {
                 reject(err)
             })
         })
+    },
+    [GET_EVENT_AVAILABLE_CATEGORIES](context, data) {
+        return new Promise((resolve, reject) => {
+            ApiService.post('Event/getavailablecategories', data).then((response) => {
+                context.commit(SET_EVENT_AVAILABLE_CATEGORIES,response.data);
+                resolve(response)
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
+    },
+    [NEW_EVENT_CATEGORIES](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/neweventcategories',data).then((response)=>{
+                resolve(response);
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [GET_EVENT_CATEGORIES](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/geteventcategories',data).then((response)=>{
+                context.commit(SET_EVENT_CATEGORIES,response.data);
+                resolve(response)
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [DELETE_EVENT_CATEGORY](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/deleteeventcategory',data).then((response)=>{
+                resolve(response)
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
     }
 }
 
@@ -134,6 +191,12 @@ const mutations = {
     },
     [SET_EVENT_DETAIL](state, payload) {
         state.eventDetails = payload.eventDetails;
+    },
+    [SET_EVENT_AVAILABLE_CATEGORIES](state,payload){
+       state.eventAvailableCategories = payload.eventCategories;
+    },
+    [SET_EVENT_CATEGORIES](state,payload){
+        state.eventCategories  =payload.eventCategoriesRel;
     }
 }
 

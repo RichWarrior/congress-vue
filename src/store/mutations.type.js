@@ -21,3 +21,5 @@ export const SET_EVENTS = 'setEvents';
 export const SET_DELETED_EVENT= 'setDeletedEvent';
 export const SET_EVENT_DETAIL = 'setEventDetail';
 export const SET_CATEGORIES = 'setCategoryList';
+export const SET_EVENT_AVAILABLE_CATEGORIES = 'setEventAvailableCategories';
+export const SET_EVENT_CATEGORIES= 'setEventCategories';

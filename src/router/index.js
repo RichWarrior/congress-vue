@@ -18,6 +18,7 @@ import newParticipant from '@/views/eventparticipant/index';
 import Categories from '@/views/category/index';
 import NewCategory from '@/views/category/new';
 import UpdateCategory from '@/views/category/update';
+import NewEventCategory from '@/views/eventcategory/new';
 
 Vue.use(Router)
 
@@ -119,6 +120,12 @@ export default new Router({
       path:'/UpdateCategory',
       component:UpdateCategory,
       props : true
+    },
+    {
+      name:'/NewEventCategory',
+      path:'/NewEventCategory',
+      component:NewEventCategory,
+      props:true
     }
   ]
 })
