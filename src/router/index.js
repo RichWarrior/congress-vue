@@ -19,6 +19,8 @@ import Categories from '@/views/category/index';
 import NewCategory from '@/views/category/new';
 import UpdateCategory from '@/views/category/update';
 import NewEventCategory from '@/views/eventcategory/new';
+import NewSponsor from '@/views/sponsor/new';
+import AddSponsorEvent from '@/views/eventsponsor/index';
 
 Vue.use(Router)
 
@@ -125,6 +127,17 @@ export default new Router({
       name:'/NewEventCategory',
       path:'/NewEventCategory',
       component:NewEventCategory,
+      props:true
+    },
+    {
+      name:'/NewSponsor',
+      path:'/NewSponsor',
+      component:NewSponsor
+    },
+    {
+      name:'/AddSponsorEvent',
+      path:'/AddSponsorEvent',
+      component:AddSponsorEvent,
       props:true
     }
   ]

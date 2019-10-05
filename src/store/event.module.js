@@ -11,7 +11,11 @@ import {
     GET_EVENT_AVAILABLE_CATEGORIES,
     NEW_EVENT_CATEGORIES,
     GET_EVENT_CATEGORIES,
-    DELETE_EVENT_CATEGORY
+    DELETE_EVENT_CATEGORY,
+    GET_EVENT_AVAILABLE_SPONSORS,
+    NEW_EVENT_SPONSOR,
+    GET_EVENT_SPONSOR,
+    DELETE_EVENT_SPONSOR
 } from '@/store/action.type';
 import {
     SET_EVENT,
@@ -19,7 +23,9 @@ import {
     SET_DELETED_EVENT,
     SET_EVENT_DETAIL,
     SET_EVENT_AVAILABLE_CATEGORIES,
-    SET_EVENT_CATEGORIES
+    SET_EVENT_CATEGORIES,
+    SET_EVENT_AVAILABLE_SPONSORS,
+    SET_EVENT_SPONSOR
 } from '@/store/mutations.type';
 const state = {
     events: [],
@@ -27,7 +33,9 @@ const state = {
     eventDetail: {},
     eventDetails: [],
     eventAvailableCategories : [],
-    eventCategories : [] 
+    eventCategories : [] ,
+    eventAvailableSponsors : [],
+    eventSponsors: []
 }
 
 const getters = {
@@ -48,6 +56,12 @@ const getters = {
     },
     getEventCategories : state => {
         return state.eventCategories;
+    },
+    getEventAvailableSponsors : state => {
+        return state.eventAvailableSponsors;
+    },
+    getEventSponsor : state => {
+        return state.eventSponsors;
     }
 }
 
@@ -176,6 +190,44 @@ const actions = {
                 reject(err);
             })
         })
+    },
+    [GET_EVENT_AVAILABLE_SPONSORS](context,data){
+        return new Promise((resolve,reject)=>{  
+            ApiService.postFile('Event/getavailablesponsor',data).then((response)=>{
+                context.commit(SET_EVENT_AVAILABLE_SPONSORS,response.data);
+                resolve(response)
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [NEW_EVENT_SPONSOR](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/neweventsponsor',data).then((response)=>{
+                resolve(response)
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [GET_EVENT_SPONSOR](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.postFile('Event/geteventsponsor',data).then((response)=>{
+                context.commit(SET_EVENT_SPONSOR,response.data);
+                resolve(response)
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [DELETE_EVENT_SPONSOR](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/deleteeventsponsor',data).then((response)=>{
+                resolve(response)
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
     }
 }
 
@@ -197,6 +249,12 @@ const mutations = {
     },
     [SET_EVENT_CATEGORIES](state,payload){
         state.eventCategories  =payload.eventCategoriesRel;
+    },
+    [SET_EVENT_AVAILABLE_SPONSORS](state,payload){        
+        state.eventAvailableSponsors = payload.data.eventSponsors;
+    },
+    [SET_EVENT_SPONSOR](state,payload){
+        state.eventSponsors = payload.data.eventSponsors;
     }
 }
 

@@ -23,3 +23,5 @@ export const SET_EVENT_DETAIL = 'setEventDetail';
 export const SET_CATEGORIES = 'setCategoryList';
 export const SET_EVENT_AVAILABLE_CATEGORIES = 'setEventAvailableCategories';
 export const SET_EVENT_CATEGORIES= 'setEventCategories';
+export const SET_EVENT_AVAILABLE_SPONSORS = 'setEventAvailableSponsors';
+export const SET_EVENT_SPONSOR ='setEventSponsor';

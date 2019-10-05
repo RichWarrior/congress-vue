@@ -41,3 +41,7 @@ export const GET_EVENT_AVAILABLE_CATEGORIES ='getEventAvailableCategories';
 export const NEW_EVENT_CATEGORIES = 'newEventCategories';
 export const GET_EVENT_CATEGORIES = 'getEventCategories';
 export const DELETE_EVENT_CATEGORY = 'deleteEventCategory';
+export const GET_EVENT_AVAILABLE_SPONSORS = 'getEventAvailableSponsors';
+export const NEW_EVENT_SPONSOR = 'newEventSponsor';
+export const GET_EVENT_SPONSOR = 'getEventSponsor';
+export const DELETE_EVENT_SPONSOR = 'deleteEventSponsor';

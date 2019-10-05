@@ -46,7 +46,7 @@
                       </td>
                       <td>
                         <v-chip v-if="item.statusId === 2" color="success">Aktif</v-chip>
-                        <v-chip v-else color="error">Onay Bekliyor</v-chip>
+                        <v-chip v-if="item.statusId === 3" color="error">Onay Bekliyor</v-chip>
                       </td>
                       <td>
                         <v-tooltip top>
@@ -61,7 +61,7 @@
                           <template v-slot:activator="{on}">
                             <v-btn
                               icon
-                              v-if="item.statusId !==2"
+                              v-if="item.statusId ===3"
                               v-on="on"
                               @click="validateSponsor(item)"
                             >
