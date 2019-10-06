@@ -45,3 +45,5 @@ export const GET_EVENT_AVAILABLE_SPONSORS = 'getEventAvailableSponsors';
 export const NEW_EVENT_SPONSOR = 'newEventSponsor';
 export const GET_EVENT_SPONSOR = 'getEventSponsor';
 export const DELETE_EVENT_SPONSOR = 'deleteEventSponsor';
+export const GET_ACTIVE_EVENTS = 'getActiveEvents'
+export const SEND_EVENT_PUSH_NOTIFICATION = 'sendEventPushNotification';

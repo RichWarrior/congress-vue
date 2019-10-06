@@ -15,7 +15,9 @@ import {
     GET_EVENT_AVAILABLE_SPONSORS,
     NEW_EVENT_SPONSOR,
     GET_EVENT_SPONSOR,
-    DELETE_EVENT_SPONSOR
+    DELETE_EVENT_SPONSOR,
+    GET_ACTIVE_EVENTS,
+    SEND_EVENT_PUSH_NOTIFICATION
 } from '@/store/action.type';
 import {
     SET_EVENT,
@@ -25,7 +27,8 @@ import {
     SET_EVENT_AVAILABLE_CATEGORIES,
     SET_EVENT_CATEGORIES,
     SET_EVENT_AVAILABLE_SPONSORS,
-    SET_EVENT_SPONSOR
+    SET_EVENT_SPONSOR,
+    SET_ACTIVE_EVENTS
 } from '@/store/mutations.type';
 const state = {
     events: [],
@@ -35,7 +38,8 @@ const state = {
     eventAvailableCategories : [],
     eventCategories : [] ,
     eventAvailableSponsors : [],
-    eventSponsors: []
+    eventSponsors: [],
+    activeEvents : []
 }
 
 const getters = {
@@ -62,6 +66,9 @@ const getters = {
     },
     getEventSponsor : state => {
         return state.eventSponsors;
+    },
+    getActiveEvents: state => {
+        return state.activeEvents;
     }
 }
 
@@ -228,6 +235,25 @@ const actions = {
                 reject(err)
             })
         })
+    },
+    [GET_ACTIVE_EVENTS](context){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/getactiveevent').then((response)=>{
+                context.commit(SET_ACTIVE_EVENTS,response.data)
+                resolve(response)
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [SEND_EVENT_PUSH_NOTIFICATION](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/sendpushnotification',data).then((response)=>{
+                resolve(response)
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
     }
 }
 
@@ -255,6 +281,9 @@ const mutations = {
     },
     [SET_EVENT_SPONSOR](state,payload){
         state.eventSponsors = payload.data.eventSponsors;
+    },
+    [SET_ACTIVE_EVENTS](state,payload){
+        state.activeEvents = payload.events;
     }
 }
 
