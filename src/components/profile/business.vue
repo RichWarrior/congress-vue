@@ -48,6 +48,7 @@
                 item-text="name"
                 outlined
                 label="Firma Kategorisi"
+                :no-data-text="$store.getters.getNoDataText"
               ></v-select>
             </v-col>
             <v-col cols="12" md="12" sm="12">
@@ -60,6 +61,7 @@
                 outlined
                 label="Ülke"
                 @change="countryChange"
+                :no-data-text="$store.getters.getNoDataText"
               ></v-select>
             </v-col>
             <v-col cols="12" md="12" sm="12">
@@ -71,6 +73,7 @@
                 item-text="name"
                 outlined
                 label="İl"
+                :no-data-text="$store.getters.getNoDataText"
               ></v-select>
             </v-col>
             <v-col cols="12" md="12" sm="12">
