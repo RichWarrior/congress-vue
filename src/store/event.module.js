@@ -17,7 +17,8 @@ import {
     GET_EVENT_SPONSOR,
     DELETE_EVENT_SPONSOR,
     GET_ACTIVE_EVENTS,
-    SEND_EVENT_PUSH_NOTIFICATION
+    SEND_EVENT_PUSH_NOTIFICATION,
+    EVENT_GET_ALL_DATA
 } from '@/store/action.type';
 import {
     SET_EVENT,
@@ -28,7 +29,8 @@ import {
     SET_EVENT_CATEGORIES,
     SET_EVENT_AVAILABLE_SPONSORS,
     SET_EVENT_SPONSOR,
-    SET_ACTIVE_EVENTS
+    SET_ACTIVE_EVENTS,
+    SET_EVENT_ALL_DATA
 } from '@/store/mutations.type';
 const state = {
     events: [],
@@ -254,6 +256,16 @@ const actions = {
                 reject(err);
             })
         })
+    },
+    [EVENT_GET_ALL_DATA](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/geteventalldata',data).then((response)=>{
+                context.commit(SET_EVENT_ALL_DATA,response.data);
+                resolve(response);
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
     }
 }
 
@@ -284,6 +296,9 @@ const mutations = {
     },
     [SET_ACTIVE_EVENTS](state,payload){
         state.activeEvents = payload.events;
+    },
+    [SET_EVENT_ALL_DATA](state,payload){
+        state.event = payload.cgevent;        
     }
 }
 

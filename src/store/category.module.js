@@ -4,7 +4,8 @@ import {
      DELETE_CATEGORY,
      GET_MAIN_CATEGORIES ,
      NEW_CATEGORY,
-     UPDATE_CATEGORY
+     UPDATE_CATEGORY,
+     GET_PARENT_CATEGORIES
     } from '@/store/action.type';
 import { SET_CATEGORIES } from '@/store/mutations.type';
 
@@ -65,6 +66,16 @@ const actions = {
         return new Promise((resolve,reject)=>{
             ApiService.post('Category/editcategory',data).then((response)=>{
                 resolve(response);
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    },
+    [GET_PARENT_CATEGORIES](context,data){
+        return new Promise((resolve,reject)=>{           
+            ApiService.post('Category/getparentcategory',data).then((response)=>{
+                context.commit(SET_CATEGORIES,response.data);
+                resolve(response)
             }).catch((err)=>{
                 reject(err)
             })

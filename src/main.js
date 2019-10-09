@@ -29,14 +29,24 @@ router.beforeEach((to, from, next) => {
         next(false);
       }
       else {
-        next();
+        if(user.profileStatus === 1){
+          if(to.path!=='/Profile'){
+            next(false);
+            router.push({path:'/Profile'})
+          }else{
+            next();
+          }
+        }else{
+          next();
+        }        
       }
     }
     if (!isAuthenticated) {
       if (to.path != '/' &&
         to.path != '/Register' &&
         to.path != '/ForgotPassword' &&
-        to.path != '/Home'
+        to.path != '/Home' &&
+        to.name != '/ViewEventDetail'
       ) {
         next(false)
       } else {

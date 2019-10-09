@@ -163,13 +163,63 @@
         </v-card>
       </v-tab-item>
       <v-tab-item value="interest">
-          <v-card>
-              <v-card-text>İlgi Alanlarım</v-card-text>
-          </v-card>
+        <v-card>
+          <v-card-text>
+            <v-data-table
+              :no-data-text="$store.getters.getNoDataText"
+              :headers="interestTableHeader"
+              :items="userInterest"
+              class="elevation-12"
+            >
+              <template v-slot:top>
+                <v-toolbar flat color="white">
+                  <v-toolbar-title>
+                    <span class="subtitle-1 hidden-sm-and-down">İlgi Alanlarım</span>
+                    <span class="caption hidden-sm-and-up">İlgi Alanlarım</span>
+                  </v-toolbar-title>
+                  <v-divider class="mx-4" inset vertical></v-divider>
+                  <div class="flex-grow-1"></div>
+                  <v-btn color="primary" dark class="mb-2" @click="newUserInterest">
+                    <v-icon class="hidden-sm-and-down" left>fa-plus</v-icon>
+                    <v-icon class="hidden-sm-and-up">fa-plus</v-icon>
+                    <span class="hidden-sm-and-down">Yeni İlgi Alanı</span>
+                  </v-btn>
+                </v-toolbar>
+              </template>
+              <template v-slot:item.actions="{item}">
+                <v-tooltip top>
+                  <template v-slot:activator="{on}">
+                    <v-btn v-on="on" icon @click="deleteInterest(item)">
+                      <v-icon>fa fa-trash</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>{{item.name}} İlgi Alanını Sil</span>
+                </v-tooltip>
+              </template>
+            </v-data-table>
+          </v-card-text>
+        </v-card>
       </v-tab-item>
       <v-tab-item value="events">
         <v-card>
-          <v-card-text>Etkinliklerim</v-card-text>
+          <v-card-text>
+            <v-data-table
+              :no-data-text="$store.getters.getNoDataText"
+              :headers="eventTableHeader"
+              :items="userEvents"
+              class="elevation-12"
+            >
+              <template v-slot:item.logo="{item}">
+                <v-avatar size="32">
+                  <v-img :src="item.logoPath"></v-img>
+                </v-avatar>
+              </template>
+              <template v-slot:item.status="{item}">
+                <v-chip class="ma-2" color="success" v-if="item.isCompleted === 1">Aktif Etkinlik</v-chip>
+                <v-chip class="ma-2" color="error" v-else>Geçmiş Etkinlik</v-chip>
+              </template>
+            </v-data-table>
+          </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -177,7 +227,15 @@
 </template>
 
 <script>
-import { GET_JOBS, GET_COUNTRIES, GET_CITIES ,UPDATE_USER} from "@/store/action.type";
+import {
+  GET_JOBS,
+  GET_COUNTRIES,
+  GET_CITIES,
+  UPDATE_USER,
+  GET_USER_INTEREST,
+  DELETE_USER_INTEREST,
+  GET_USER_PARTICIPANT_EVENTS
+} from "@/store/action.type";
 import cityEntity from "@/entity/city";
 export default {
   props: {
@@ -221,7 +279,43 @@ export default {
         /^[\\+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?[0-9]{4,6}$/.test(
           v
         ) || "Lütfen Uygun Bir Telefon Numarası Giriniz"
-    ]
+    ],
+    interestTableHeader: [
+      {
+        text: "İlgi Alanı Adı",
+        align: "left",
+        sortable: true,
+        value: "name"
+      },
+      {
+        text: "İşlemler",
+        align: "left",
+        sortable: false,
+        value: "actions"
+      }
+    ],
+    userInterest: [],
+    eventTableHeader: [
+      {
+        text: "Etkinlik Adı",
+        align: "left",
+        sortable: true,
+        value: "name"
+      },
+      {
+        text: "Logo",
+        align: "left",
+        sortable: false,
+        value: "logo"
+      },
+      {
+        text: "Durum",
+        align: "left",
+        sortable: false,
+        value: "status"
+      }
+    ],
+    userEvents: []
   }),
   methods: {
     countryChange() {
@@ -236,14 +330,48 @@ export default {
           this.$swal("HATA", err.errMessage, "error");
         });
     },
-    saveItem(){
-        if(this.formValid){
-            this.$store.dispatch(UPDATE_USER,this.user).then((response)=>{
-                this.$swal('BAŞARILI',response.errMessage,'success')
-            }).catch((err)=>{
-                this.$swal('HATA',err.errMessage,'error')
+    saveItem() {
+      if (this.formValid) {
+        this.$store
+          .dispatch(UPDATE_USER, this.user)
+          .then(response => {
+            this.$swal("BAŞARILI", response.errMessage, "success");
+          })
+          .catch(err => {
+            this.$swal("HATA", err.errMessage, "error");
+          });
+      }
+    },
+    newUserInterest() {
+      this.$router.push({ path: "/NewUserInterest" });
+    },
+    deleteInterest(item) {
+      let indexOf = this.userInterest.indexOf(item);
+      this.$swal({
+        title: "Emin Misiniz?",
+        text: `${item.name} İlgi Alanını Silmek İstediğinize Emin Misiniz?`,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Evet,Sil",
+        cancelButtonText: "Vazgeç"
+      }).then(result => {
+        if (result.value) {
+          this.$store
+            .dispatch(DELETE_USER_INTEREST, item)
+            .then(response => {
+              this.$swal("BAŞARILI", response.errMessage, "success").then(
+                () => {
+                  this.userInterest.splice(indexOf, 1);
+                }
+              );
             })
+            .catch(err => {
+              this.$swal("HATA", err.errMessage, "error");
+            });
         }
+      });
     }
   },
   created() {
@@ -259,6 +387,22 @@ export default {
           .then(() => {
             this.countries = this.$store.getters.getCountries;
             this.countryChange();
+            this.$store
+              .dispatch(GET_USER_INTEREST)
+              .then(() => {
+                this.userInterest = this.$store.getters.getUserInterest;
+                this.$store
+                  .dispatch(GET_USER_PARTICIPANT_EVENTS)
+                  .then(() => {
+                    this.userEvents = this.$store.getters.getUserParticipantEvents;
+                  })
+                  .catch(err => {
+                    this.$swal("HATA", err.errMessage, "error");
+                  });
+              })
+              .catch(err => {
+                this.$swal("HATA", err.errMessage, "error");
+              });
           })
           .catch(err => {
             this.$swal("HATA", err.errMessage, "error");

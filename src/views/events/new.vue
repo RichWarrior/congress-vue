@@ -20,6 +20,14 @@
                   required
                   outlined
                 ></v-text-field>
+                <v-textarea
+                  v-model="event.description"
+                  :rules="descriptionRule"
+                  counter
+                  name="input-3-1"
+                  label="Etkinlik Açıklaması"
+                  outlined
+                ></v-textarea>
                 <v-file-input
                   v-model="event.logoFiles"
                   :rules="logoRule"
@@ -56,13 +64,13 @@
                   label="Adres"
                   outlined
                 ></v-textarea>
-                <h1 class="subtitle-1 mb-2">Başlangıç Tarihi</h1>
+                <h1 class="subtitle-1 mb-2 black--text">Başlangıç Tarihi</h1>
                 <v-date-picker 
                     v-model="event.startDate"
                     full-width                    
                     locale="tr"
                     ></v-date-picker>
-                       <h1 class="subtitle-1 mb-2 mt-2">Bitiş Tarihi</h1>
+                       <h1 class="subtitle-1 mb-2 mt-2 black--text">Bitiş Tarihi</h1>
                 <v-date-picker 
                     v-model="event.endDate"
                     :min="event.startDate"
@@ -108,7 +116,8 @@ export default {
     ],
     countryRule: [v => !!v || "Ülke Gereklidir"],
     cityRule: [v => !!v || "Şehir Gereklidir"],
-    addressRule: [v => !!v || "Adres Gereklidir"]
+    addressRule: [v => !!v || "Adres Gereklidir"],
+    descriptionRule : [v=>!!v||"Açıklama Gereklidir."]
   }),
   methods: {
     goBack() {

@@ -6,12 +6,11 @@
       </v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase hidden-sm-and-down">
         <span>
-          Vue Material
-          <span class="font-weight-light">Dashboard</span>
+          <span class="font-weight-light">Congress</span>
         </span>
       </v-toolbar-title>
       <v-toolbar-title class="text-uppercase hidden-sm-and-up">
-        <span>Material Dashboard</span>
+        <span>Congress</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="hidden-sm-and-down">
@@ -39,7 +38,7 @@
               </v-btn>
             </template>
             <span>Oturum Kapat</span>
-          </v-tooltip>          
+          </v-tooltip>
         </v-row>
       </div>
       <div class="hidden-sm-and-up">
@@ -93,7 +92,7 @@ export default {
 </script>
 
 <style scoped>
-.avatar{
+.avatar {
   cursor: pointer;
 }
 </style>

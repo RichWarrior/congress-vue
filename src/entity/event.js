@@ -2,6 +2,7 @@ export default{
     id : 0,
     userId : 0,
     name:'',
+    description:'',
     logoPath:'',
     logoFiles : [],
     countryId :0,

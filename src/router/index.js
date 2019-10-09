@@ -22,6 +22,8 @@ import NewEventCategory from '@/views/eventcategory/new';
 import NewSponsor from '@/views/sponsor/new';
 import AddSponsorEvent from '@/views/eventsponsor/index';
 import PushNotification from '@/views/pushnotification/index';
+import NewUserInterest from '@/views/userinterest/new';
+import ViewEventDetail from '@/views/eventdetail/view';
 
 Vue.use(Router)
 
@@ -145,6 +147,16 @@ export default new Router({
       name:'/SendNotification',
       path:'/SendNotification',
       component:PushNotification
+    },
+    {
+      name:'/NewUserInterest',
+      path:'/NewUserInterest',
+      component:NewUserInterest
+    },
+    {
+      name:'/ViewEventDetail',
+      path:'/ViewEventDetail/:id',
+      component:ViewEventDetail
     }
   ]
 })

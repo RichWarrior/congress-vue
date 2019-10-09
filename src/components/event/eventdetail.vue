@@ -12,7 +12,7 @@
               outlined
               required
             ></v-text-field>
-          </v-col>
+          </v-col>         
           <v-col cols="12" md="6">
             <v-file-input
               v-model="item.logoFiles"
@@ -59,6 +59,16 @@
               outlined
             ></v-textarea>       
           </v-col>
+            <v-col cols="12" md="6">
+            <v-textarea
+              v-model="item.description"
+              :rules="descriptionRule"
+              counter
+              name="input-2-1"
+              label="Açıklama"
+              outlined
+            ></v-textarea>       
+          </v-col>
         </v-row>
         <v-row class="ma-5">
           <v-col cols="12" md="6">
@@ -102,7 +112,8 @@ export default {
     ],
     countryRule: [v => !!v || "Ülke Gereklidir"],
     cityRule: [v => !!v || "Şehir Gereklidir"],
-    addressRule: [v => !!v || "Adres Gereklidir"]
+    addressRule: [v => !!v || "Adres Gereklidir"],
+    descriptionRule : [v=>!!v||"Açıklama Gereklidir"]
   }),
   methods: {
     countryChange() {
