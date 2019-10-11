@@ -58,8 +58,7 @@ export default {
   }),
   methods: {
     viewEventDetail(item){
-      this.$router.push({name:'/ViewEventDetail',params:{id:item.id}})
-      console.log(item)
+      this.$router.push({name:'/ViewEventDetail',params:{id:item.id}})      
     }
   },
   created() {

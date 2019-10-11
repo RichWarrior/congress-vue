@@ -16,7 +16,8 @@ import {
     GET_USER_INTEREST,
     DELETE_USER_INTEREST,
     GET_USER_PARTICIPANT_EVENTS,
-    GET_HOMEPAGE_EVENTS
+    GET_HOMEPAGE_EVENTS,
+    FORGOT_PASSWORD
 } from './action.type';
 import {
     PURGE_USER,
@@ -201,6 +202,15 @@ const actions = {
             ApiService.post('Event/gethomepageevent').then((response)=>{
                 context.commit(SET_HOMEPAGE_EVENTS,response.data);
                 resolve(response)
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
+    },
+    [FORGOT_PASSWORD](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('user/forgotpassword',data).then((response)=>{
+                resolve(response);
             }).catch((err)=>{
                 reject(err);
             })

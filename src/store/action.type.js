@@ -55,3 +55,4 @@ export const DELETE_USER_INTEREST = 'deleteUserInterest';
 export const GET_USER_PARTICIPANT_EVENTS = 'getUserParticipantEvents';
 export const GET_HOMEPAGE_EVENTS = 'getHomePageEvents';
 export const EVENT_GET_ALL_DATA = 'eventGetById';
+export const FORGOT_PASSWORD = 'forgotPassword';
