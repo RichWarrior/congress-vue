@@ -17,7 +17,8 @@ import {
     DELETE_USER_INTEREST,
     GET_USER_PARTICIPANT_EVENTS,
     GET_HOMEPAGE_EVENTS,
-    FORGOT_PASSWORD
+    FORGOT_PASSWORD,
+    ACTIVATION_USER
 } from './action.type';
 import {
     PURGE_USER,
@@ -211,6 +212,15 @@ const actions = {
         return new Promise((resolve,reject)=>{
             ApiService.post('user/forgotpassword',data).then((response)=>{
                 resolve(response);
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
+    },
+    [ACTIVATION_USER](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('user/activateuser',data).then((response)=>{
+                resolve(response)
             }).catch((err)=>{
                 reject(err);
             })

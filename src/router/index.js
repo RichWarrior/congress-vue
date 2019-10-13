@@ -24,6 +24,7 @@ import AddSponsorEvent from '@/views/eventsponsor/index';
 import PushNotification from '@/views/pushnotification/index';
 import NewUserInterest from '@/views/userinterest/new';
 import ViewEventDetail from '@/views/eventdetail/view';
+import ActivationUser from '@/views/user/activationUser';
 
 Vue.use(Router)
 
@@ -157,6 +158,11 @@ export default new Router({
       name:'/ViewEventDetail',
       path:'/ViewEventDetail/:id',
       component:ViewEventDetail
+    },
+    {
+      name:'/ActivationAccount',
+      path:'/ActivationAccount/:guid',
+      component:ActivationUser
     }
   ]
 })

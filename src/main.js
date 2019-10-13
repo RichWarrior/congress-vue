@@ -46,7 +46,8 @@ router.beforeEach((to, from, next) => {
         to.path != '/Register' &&
         to.path != '/ForgotPassword' &&
         to.path != '/Home' &&
-        to.name != '/ViewEventDetail'
+        to.name != '/ViewEventDetail' &&
+        to.name != '/ActivationAccount'
       ) {
         next(false)
       } else {
