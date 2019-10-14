@@ -1,6 +1,6 @@
 <template>
-  <v-row align="start" justify="center">
-    <v-col cols="12" sm="12" md="8" class="ma-5">
+  <v-row align="start" justify="center" class="ma-2">
+    <v-col cols="12" sm="12" md="10">
       <v-card>
         <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
           <v-tabs-slider></v-tabs-slider>
@@ -25,21 +25,21 @@
           <v-tab-item value="event_info">
             <v-card flat>
               <v-card-text>
-                <span class="subtitle-1">Info</span>
+                <eventinfo :eventinfo="eventInfo" :user="user"/>
               </v-card-text>
             </v-card>
           </v-tab-item>     
           <v-tab-item value="event_timeline">
             <v-card flat>
               <v-card-text>
-                <span class="subtitle-1">Timeline</span>
+                <eventtimeline :timeline="eventDetails" :event="eventInfo"/>
               </v-card-text>
             </v-card>
           </v-tab-item>  
           <v-tab-item value="event_participant">
             <v-card flat>
               <v-card-text>
-                <span class="subtitle-1">Participant</span>
+                <eventparticipant :participants="eventParticiants"/>
               </v-card-text>
             </v-card>
           </v-tab-item>        
@@ -52,12 +52,21 @@
 <script>
 import { EVENT_GET_ALL_DATA } from "@/store/action.type";
 import eventEntity from "@/entity/event";
+import eventinfo from '@/components/eventView/eventinfo';
+import eventtimeline from '@/components/eventView/eventdetail';
+import eventparticipant from '@/components/eventView/eventparticipant';
 export default {
+  components:{
+    eventinfo,
+    eventtimeline,
+    eventparticipant
+  },
   data: () => ({
     tab: 'event_info',
-    event: {},
+    eventInfo: {},
     eventDetails:[],
-    eventParticiants:[]
+    eventParticiants:[],
+    user:{}
   }),
   created() {
     let eventObject = Object.assign({}, eventEntity);
@@ -65,9 +74,10 @@ export default {
     this.$store
       .dispatch(EVENT_GET_ALL_DATA, eventObject)
       .then(() => {
-        this.event = this.$store.getters.getEvent;
+        this.eventInfo = this.$store.getters.getEvent;
         this.eventDetails = this.$store.getters.getEventDetails;
-        this.eventParticiants = this.$store.getters.getEventParticipants;        
+        this.eventParticiants = this.$store.getters.getEventParticipants;    
+        this.user = this.$store.getters.getEventCreator;    
       })
       .catch(err => {
         this.$swal("HATA", err.errMessage, "error").then(() => {

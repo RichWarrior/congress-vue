@@ -26,6 +26,7 @@ router.beforeEach((to, from, next) => {
   } else {
     if (isAuthenticated) {
       if (to.path === '/') {
+        router.push({path:'/Home'})
         next(false);
       }
       else {

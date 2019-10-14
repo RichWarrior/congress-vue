@@ -42,7 +42,8 @@ const state = {
     eventAvailableSponsors : [],
     eventSponsors: [],
     activeEvents : [],
-    eventParticipants:[]
+    eventParticipants:[],
+    eventCreator : {}
 }
 
 const getters = {
@@ -75,6 +76,9 @@ const getters = {
     },
     getEventParticipants : state => {
         return state.eventParticipants;
+    },
+    getEventCreator: state => {
+        return state.eventCreator;
     }
 }
 
@@ -304,7 +308,8 @@ const mutations = {
     [SET_EVENT_ALL_DATA](state,payload){
         state.event = payload.cgevent;    
         state.eventDetails = payload.eventDetails;
-        state.eventParticipants = payload.eventParticipants;        
+        state.eventParticipants = payload.eventParticipants; 
+        state.eventCreator = payload.eventCreator;       
     }
 }
 
