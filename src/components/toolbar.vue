@@ -41,11 +41,11 @@
           </v-tooltip>
         </v-row>
       </div>
-      <div class="hidden-sm-and-up">
+      <div class="hidden-sm-and-up" v-if="!$store.getters.isAuthenticated">
         <v-menu offset-y>
-          <template v-slot:activator="{ on }" color="primary">
-            <v-btn v-on="on">
-              <v-icon class="black--text">fa-ellipsis-h</v-icon>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" color="primary">
+              <v-icon>fa-ellipsis-h</v-icon>
             </v-btn>
           </template>
           <v-list>
@@ -61,6 +61,23 @@
                 <span class="ml-2">Giriş Yap</span>
               </v-list-item-title>
             </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+      <div class="hidden-sm-and-up" v-if="$store.getters.isAuthenticated">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" color="primary">
+              <v-icon class="black--text">fa-ellipsis-h</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item @click="logout">
+              <v-list-item-title>
+                <v-icon>fa-user-plus</v-icon>
+                <span class="ml-2">Oturum Kapat</span>
+              </v-list-item-title>
+            </v-list-item>           
           </v-list>
         </v-menu>
       </div>
