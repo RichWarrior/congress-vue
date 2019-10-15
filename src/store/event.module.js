@@ -18,7 +18,9 @@ import {
     DELETE_EVENT_SPONSOR,
     GET_ACTIVE_EVENTS,
     SEND_EVENT_PUSH_NOTIFICATION,
-    EVENT_GET_ALL_DATA
+    EVENT_GET_ALL_DATA,
+    FILTER_EVENTS,
+    SET_PARTICIPANT_REQUEST
 } from '@/store/action.type';
 import {
     SET_EVENT,
@@ -270,6 +272,25 @@ const actions = {
             ApiService.post('Event/geteventalldata',data).then((response)=>{
                 context.commit(SET_EVENT_ALL_DATA,response.data);
                 resolve(response);
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
+    },
+    [FILTER_EVENTS](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/filterevent',data).then((response)=>{
+                context.commit(SET_EVENTS,response.data);
+                resolve(response)
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
+    },
+    [SET_PARTICIPANT_REQUEST](context,data){
+        return new Promise((resolve,reject)=>{
+            ApiService.post('Event/sendparticipantrequest',data).then((response)=>{
+                resolve(response)
             }).catch((err)=>{
                 reject(err);
             })

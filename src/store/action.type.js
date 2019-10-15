@@ -57,3 +57,5 @@ export const GET_HOMEPAGE_EVENTS = 'getHomePageEvents';
 export const EVENT_GET_ALL_DATA = 'eventGetById';
 export const FORGOT_PASSWORD = 'forgotPassword';
 export const ACTIVATION_USER = 'activationUser';
+export const FILTER_EVENTS= 'filterEvents';
+export const SET_PARTICIPANT_REQUEST= 'sendParticipantRequest';
