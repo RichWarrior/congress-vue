@@ -7,6 +7,7 @@
             <v-card>
               <v-form v-model="formValid">
                 <v-row class="ma-1">
+                  <h1 class="title ma-2">Filtrele</h1>
                   <div class="flex-grow-1"></div>
                    <v-btn class="mt-2 mr-4" icon @click="getEvents">
                      <v-icon>fa fa-sync</v-icon>
