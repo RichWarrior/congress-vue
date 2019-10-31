@@ -4,7 +4,7 @@
             <v-flex xs12 md6 class="ma-5">
                 <v-card class="elevation-12">
                     <v-toolbar color="primary" dark>
-                        <v-btn icon>
+                        <v-btn icon @click="goBack">
                             <v-icon>fa fa-arrow-left</v-icon>
                         </v-btn>
                         <v-toolbar-title>Yeni İlgi Alanı Ekle</v-toolbar-title>
