@@ -22,7 +22,7 @@ const ApiService = {
     },
 
     purgeHeader() {
-        delete Vue.axios.defaults.headers.commot["Authorization"];
+        delete Vue.axios.defaults.headers.common["Authorization"];
     },
 
     post(resource, params) {
